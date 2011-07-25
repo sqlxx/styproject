@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Event {
 	
-	public String getSchemaSymbolicName();
+	public String getSymbolicName();
 	
 	public List<EventField> getEventFields();
 	

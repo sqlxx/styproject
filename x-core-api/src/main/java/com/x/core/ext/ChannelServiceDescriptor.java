@@ -14,7 +14,7 @@ public interface ChannelServiceDescriptor extends ServiceDescriptor, Serializabl
 	 * @return symbolic name which is unique in the scope of service provider
 	 * it belongs to.
 	 */
-	public String getSimbolicName();
+	public String getSymbolicName();
 	
 
 	
