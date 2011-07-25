@@ -7,5 +7,8 @@ public enum CompletionState {
 	Failed,
 	
 	Aborted
+	
+	
 
 }
+
