@@ -22,4 +22,7 @@ public interface ExtServiceDescriptor {
 	
 	public boolean isActivationRequired();	
 	
+	long getUserNumber();
+	long getInstanceNumber();
+	
 }

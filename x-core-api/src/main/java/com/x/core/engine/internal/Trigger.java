@@ -1,8 +1,13 @@
 package com.x.core.engine.internal;
 
+import java.util.List;
+
 public interface Trigger {
 
 	LogicalConditionOpt where(Condition c);
 	
-	//TODO how to return the Condition list and show their relationship.
+	List<Condition> getConditions();
+	
+	List<LogicalConditionOpt.Type> getRelationship();
+	
 }

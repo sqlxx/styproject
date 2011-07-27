@@ -1,8 +1,12 @@
 package com.x.core.engine.internal;
 
+import java.util.List;
+
 public interface Shot {
 	
 	LogicalActionOpt perform(Action a);
 	
-	//TODO how to return the Action list and show their relationship.
+	List<Action> getActions();
+	
+	List<LogicalActionOpt.Type> getRelationship();
 }

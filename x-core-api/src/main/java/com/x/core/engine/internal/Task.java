@@ -11,4 +11,10 @@ public interface Task extends Resource {
 	
 	List<TaskExecutionRecord> getExecutionHistory();
 	
+	boolean isActive();
+	
+	void setActive(boolean active);
+	
+	
+	
 }
