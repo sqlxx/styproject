@@ -12,6 +12,4 @@ public interface ChannelServiceDescriptor extends ExtServiceDescriptor{
 	List<ActionServiceDescriptor> getActionServiceDescriptors();
 	
 	List<FeedServiceDescriptor> getFeedServiceDescriptors();
-	
-
 }
