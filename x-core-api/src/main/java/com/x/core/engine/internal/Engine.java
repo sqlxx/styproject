@@ -1,6 +1,7 @@
 package com.x.core.engine.internal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -17,11 +18,7 @@ public interface Engine {
 	 * @return User that was created and associated with the uid.
 	 */
 	public User retrieveUser(long uid);
-	/**
-	 * Create a new user.
-	 * @return User.
-	 */
-	public User createUser();
+
 	/**
 	 * @return the descriptors of all available service providers.
 	 */
@@ -33,7 +30,7 @@ public interface Engine {
 	 * @param serviceDescriptor
 	 * @return
 	 */
-	public Requirement getServiceCreationRequirement(
+	public Requirement getChannelServiceCreationRequirement(
 			User user, ChannelServiceDescriptor serviceDescriptor );
 	
 	

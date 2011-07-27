@@ -9,6 +9,5 @@ public enum CompletionState {
 	Aborted
 	
 	
-
 }
 

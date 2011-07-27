@@ -15,8 +15,6 @@ public interface Resource {
 	
 	public Date getLastModified();
 	
-	void setExtraParams(Map<String, String> params);
 	
-	Map<String, String> getExtraParams();
 	
 }
