@@ -38,6 +38,12 @@ public interface Requirement {
 	public URL getUrl(URL callbackUrl);
 	
 	/**
+	 * Evaluate the requirement completion state.
+	 * 
+	 * NOTE: ServiceProvider is recommended NOT persist the user input as soon as requirement
+	 * is filled. User may abort the task creation. So cache it until summit or abort is
+	 * invoked.
+	 * 
 	 * 
 	 * @param reqId - the id that Engine wants to associate with the 
 	 * Service, Condition or etc that is created for the Requirement.
@@ -46,7 +52,11 @@ public interface Requirement {
 	 * callbackUrl.
 	 * @return RequirementCompletion - {@link RequirementCompletion}
 	 */
-	public RequirementCompletion submit(long reqId, Map<String, String> params);
+	public RequirementCompletion eval(long reqId, Map<String, String> params);
+	
+	public void summit();
+	
+	public void abort();
 
 	
 }
