@@ -8,13 +8,13 @@ import com.x.core.ext.ServiceDescriptor;
  * Service provider uses this interface to register Services into
  * the Engine.
  * 
- * A service provider can have multiple Services which probably
- * don't come up at once. So new Services should be able to added
+ * A service provider can have multiple ChannelServices which probably
+ * don't come up at once. So new ChannelServices should be able to added
  * continuously. Engine would take care of the correlation as long
  * as the ServiceProviderDescriptor's symbolicName remains the same.
  * 
  * For example: Google is a service provider while gmail and gtalk 
- * can be two Services. They can be registered one after another weeks
+ * can be two ChannelServices. They can be registered one after another weeks
  * later.
  *  
  * 
