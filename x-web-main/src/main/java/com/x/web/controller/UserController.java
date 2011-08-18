@@ -35,6 +35,14 @@ public class UserController extends BaseController{
     public String login(@RequestParam("username") String userName, @RequestParam String password, HttpSession session) {
         try {
             
+            if (userName == null || userName.trim().length() == 0) {
+                setErrorMessage("用户名或email不能为空");
+                return "xweb.login";
+            } else if (password == null || password.length() == 0) {
+                setErrorMessage("密码不能为空");
+                return "xweb.login";
+            }
+            
             User user = ums.authenticate(userName, password);
             if (user != null) {
                 session.setAttribute("user", user);
