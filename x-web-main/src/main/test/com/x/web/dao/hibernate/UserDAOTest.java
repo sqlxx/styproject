@@ -59,6 +59,7 @@ public class UserDAOTest extends BaseTestCase {
         result.setEmail("test2@test.com");
         Date lastLogin = new Date();
         result.setLastLogin(lastLogin);
+        result.setStatus(UserStatus.ACTIVE);
         ud.saveOrUpdate(result);
         
         //Query again
