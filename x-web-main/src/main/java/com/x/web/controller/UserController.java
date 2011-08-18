@@ -10,15 +10,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.WebRequest;
 
+import com.x.web.constant.SessionKey;
 import com.x.web.domain.User;
 import com.x.web.exception.AuthException;
 import com.x.web.formbean.UserRegForm;
 import com.x.web.service.UserManagementService;
 import com.x.web.util.FlashMap;
-import com.x.web.util.Message;
 
 /**
  * 
@@ -56,6 +54,14 @@ public class UserController extends BaseController{
             setErrorMessage(ex.getMessage());
             return "xweb.login";
         }
+    }
+    
+    @RequestMapping("logout") 
+    public String logout(HttpSession session){
+        session.removeAttribute(SessionKey.USER);
+        setInfoMessage("请重新登录");
+        return "xweb.login";
+        
     }
     
     @RequestMapping(value="login", method=RequestMethod.GET)

@@ -1,5 +1,6 @@
 package com.x.web.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -59,6 +60,15 @@ public class UserManagementService {
             log.warn("Unknown user '{}' try to login.", usernameOrEmail);
             throw new AuthException("用户名或密码错误，请重试！");
         }
+    }
+    
+    public User login(String usernameOrEmail, String password) {
+        User user = authenticate(usernameOrEmail, password);
+        if (user != null) {
+            user.setLastLogin(new Date());
+            userDAO.saveOrUpdate(user);
+        }
+        return user;
     }
     
     public User registerUser(String userName, String email, String password) {
