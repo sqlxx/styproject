@@ -19,7 +19,12 @@
 	
 	<definition name="xweb.register" extends="xweb.normal_layout">
 		<put-attribute name="body" value="/WEB-INF/jsp/register.jsp"/>
-		<put-attribute name="title" value="用户登录"/>
+		<put-attribute name="title" value="用户注册"/>
+	</definition>
+	
+	<definition name="xweb.main" extends="xweb.normal_layout">
+		<put-attribute name="body" value="/WEB-INF/jsp/main.jsp"/>
+		<put-attribute name="title" value="主页面"/>
 	</definition>
 </tiles-definitions>
 	

@@ -32,16 +32,21 @@ public class UserController extends BaseController{
     private UserManagementService ums;
     
     @RequestMapping(value="login", method=RequestMethod.POST)
-    public @ResponseBody String login(@RequestParam("username") String userName, @RequestParam String password ) {
+    public String login(@RequestParam("username") String userName, @RequestParam String password, HttpSession session) {
         try {
-        User user = ums.authenticate(userName, password);
+            
+            User user = ums.authenticate(userName, password);
             if (user != null) {
-                return "welcome " + userName + "with password " +  password;
+                session.setAttribute("user", user);
+                FlashMap.setSuccessMessage("欢迎 " + userName + ", 你目前的状态是：" + user.getStatus().toString());
+                return "redirect:/main";
             } else {
-                return "登录失败";
+                setErrorMessage("登录失败");
+                return "xweb.login";
             }
         } catch (AuthException ex) {
-            return ex.getMessage();
+            setErrorMessage(ex.getMessage());
+            return "xweb.login";
         }
     }
     
@@ -51,14 +56,13 @@ public class UserController extends BaseController{
     }
     
     @RequestMapping(value="register", method=RequestMethod.POST)
-    public String register(@Valid UserRegForm userRegForm, BindingResult result, HttpSession session, WebRequest request) {
+    public String register(@Valid UserRegForm userRegForm, BindingResult result) {
         
         if (result.hasErrors()) {
-            
-            request.setAttribute("message", new Message(Message.MessageType.error, "用户注册失败"), WebRequest.SCOPE_REQUEST);
+            setErrorMessage("用户注册失败");
             return "xweb.register";
         } else if (userRegForm.getPassword() != null && !userRegForm.getPassword().equals(userRegForm.getVerifyPassword())) {
-            request.setAttribute("message", new Message(Message.MessageType.error, "两次密码输入不同"), WebRequest.SCOPE_REQUEST);
+            setErrorMessage("两次密码输入不同");
             return "xweb.register";
         }
         
@@ -71,6 +75,7 @@ public class UserController extends BaseController{
         }
         return "redirect:register";
     }
+
     
     @RequestMapping(value="register", method=RequestMethod.GET)
     public String register(HttpSession session, Model model) {
