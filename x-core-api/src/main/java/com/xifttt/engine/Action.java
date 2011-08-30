@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * This interface is supposed to be implemented by the web layer.
  * 
- * @author Jimmy
+ * @author Jimmy 
  *
  */
 public interface Action {
