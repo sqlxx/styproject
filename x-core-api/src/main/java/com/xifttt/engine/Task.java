@@ -36,6 +36,14 @@ public interface Task {
 	 * 
 	 * Example:
 	 * (111 and (112 or 113))
+	 * 
+	 * Example:
+	 * 111
+	 * 
+	 * Example:
+	 * ((111 and 112) and 113)
+	 * 
+	 * 
 	 * @return
 	 */
 	public String getTriggerRule();
@@ -43,7 +51,7 @@ public interface Task {
 	
 	/**
 	 * expression := action | multi_action_expression
-	 * multi_action_expression := action ':' '(' success_expression '/' failure_expression '/' whatever_expression ')'
+	 * multi_action_expression := action ':' success_expression '/' failure_expression '/' whatever_expression 
 	 * succeed_expression := '' | expression
 	 * failure_expression := '' | expression
 	 * whatever_expression := '' | expression
@@ -53,10 +61,11 @@ public interface Task {
 	 * number := digit | digit number
 	 * 
 	 * Example:
-	 * 111:(112/113/)
-	 * 
+	 * 111:112/113/ 
 	 * Explanation: if 111 succeeded execute 112; otherwise execute 113
 	 * 
+	 * 111://112://113
+	 * Explanation: execute 111, 112 and 113 in sequence regardless of the failure.
 	 * 
 	 * @return
 	 */

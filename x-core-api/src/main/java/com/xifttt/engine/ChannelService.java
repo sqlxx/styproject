@@ -1,5 +1,7 @@
 package com.xifttt.engine;
 
+import java.util.Collection;
+
 public interface ChannelService {
 	
 	/** 
@@ -11,11 +13,11 @@ public interface ChannelService {
 	 * This method is called back by Engine.
 	 * @param condition
 	 */
-	public void setUpConditoin(Condition condition);
+	public void setUpCondition(Condition condition);
 	/**
 	 * This method is called back by Engine.
 	 * @param action
 	 */
-	public void runAction(Action action);
+	public void runAction(Action action, Collection<ActionParam> params);
 
 }
