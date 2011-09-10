@@ -52,7 +52,7 @@ public interface Task {
 	/**
 	 * expression := action | multi_action_expression
 	 * multi_action_expression := action ':' success_expression '/' failure_expression '/' whatever_expression 
-	 * succeed_expression := '' | expression
+	 * success_expression := '' | expression
 	 * failure_expression := '' | expression
 	 * whatever_expression := '' | expression
 	 * 
