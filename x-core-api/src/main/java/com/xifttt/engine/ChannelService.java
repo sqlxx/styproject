@@ -13,11 +13,16 @@ public interface ChannelService {
 	 * This method is called back by Engine.
 	 * @param condition
 	 */
-	public void setUpCondition(Condition condition);
+	public void setCondition(ConditionBean condition);
+	/**
+	 * This method is called back by Engine.
+	 * @param condition
+	 */
+	public void unsetCondition(ConditionBean condition);
 	/**
 	 * This method is called back by Engine.
 	 * @param action
 	 */
-	public void runAction(Action action, Collection<ActionParam> params);
+	public void runAction(ActionBean action, Collection<ActionParam> params);
 
 }

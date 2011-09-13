@@ -7,13 +7,29 @@ import java.util.Map;
  * @author Jimmy
  *
  */
-public interface Condition {
+public class ConditionBean {
 	
+
+	private long id;
+	
+
+	private long conditionServiceId;
+	
+
+	private long channelServiceId;
+	
+
+	public Map<String, ?> extraParams;
 	/** 
 	 * @return non-zero. 0 is reserved for N/A.
 	 */
-	public long getId();
-	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	/**
 	 * Optional
 	 * 
@@ -22,8 +38,13 @@ public interface Condition {
 	 * <li>non-zero: Engine can make use of the ConditionServiceId directly, which saves performance</li>
 	 * 
 	 */
-	public long getConditionServiceId();
-	
+	public long getConditionServiceId() {
+		return conditionServiceId;
+	}
+
+	public void setConditionServiceId(long conditionServiceId) {
+		this.conditionServiceId = conditionServiceId;
+	}
 	/**
 	 * Optional
 	 * 
@@ -32,8 +53,13 @@ public interface Condition {
 	 * <li>non-zero: Engine can make use of the ChannelServiceId directly, which saves performance</li>
 	 * 
 	 */
-	public long getChannelServiceId();
-	
+	public long getChannelServiceId() {
+		return channelServiceId;
+	}
+
+	public void setChannelServiceId(long channelServiceId) {
+		this.channelServiceId = channelServiceId;
+	}
 	/**
 	 * The extraParams will be passed to ChannelService.
 	 * 
@@ -44,6 +70,14 @@ public interface Condition {
 	 * 
 	 * @return
 	 */
-	public Map<String, ?> getExtraParams();
+	public Map<String, ?> getExtraParams() {
+		return extraParams;
+	}
+
+	public void setExtraParams(Map<String, ?> extraParams) {
+		this.extraParams = extraParams;
+	}
+	
+	
 
 }

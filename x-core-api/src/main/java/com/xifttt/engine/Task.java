@@ -2,73 +2,72 @@ package com.xifttt.engine;
 
 import java.util.Collection;
 /**
- * This interface is supposed to be implemented by the web layer.
+ * 
  * 
  * @author Jimmy
  *
  */
-public interface Task {
+public class Task {
 	
-	public Collection<Condition> getConditions();
-	public Collection<Action> getActions();
+	private long conditionCombinationWindow;
 	
+	private long livePeriod;
+	
+	private com.xifttt.engine.ConditionExpression conditionExpression;
+	private com.xifttt.engine.ActionExpression actionExpression;
+	
+	
+
 	/**
-	 * @return seconds
+	 * @param livePeriod seconds
 	 */
-	public long getConditionCombinationWindow();
+	public void setLivePeriod(long livePeriod) {
+		this.livePeriod = livePeriod;
+	}
 	
+	 
+	public long getLivePeriod(){
+		return this.livePeriod;
+	}
+	
+
+
 	/**
-	 * @return seconds
+	 * @param conditionCombinationWindow seconds
 	 */
-	public long getLivePeriod();
+	public void setConditionCombinationWindow(long conditionCombinationWindow) {
+		this.conditionCombinationWindow = conditionCombinationWindow;
+	}
+
+
+	public long getConditionCombinationWindow(){
+		return this.conditionCombinationWindow;
+	}
 	
-	/**
-	 * 
-	 * expression := and_expression | or_expression | condition
-	 * and_expression := '(' expression 'and' expression ')'
-	 * or_expression := '(' expression 'or' expression ')'  
-	 * 
-	 * condition := number
-	 * digit := '0' | '1' | ... '9'
-	 * number := digit | digit number
-	 *  
-	 * 
-	 * 
-	 * Example:
-	 * (111 and (112 or 113))
-	 * 
-	 * Example:
-	 * 111
-	 * 
-	 * Example:
-	 * ((111 and 112) and 113)
-	 * 
-	 * 
-	 * @return
-	 */
-	public String getTriggerRule();
+
+
 	
 	
-	/**
-	 * expression := action | multi_action_expression
-	 * multi_action_expression := action ':' success_expression '/' failure_expression '/' whatever_expression 
-	 * success_expression := '' | expression
-	 * failure_expression := '' | expression
-	 * whatever_expression := '' | expression
-	 * 
-	 * action := number
-	 * digit := '0' | '1' | ... '9'
-	 * number := digit | digit number
-	 * 
-	 * Example:
-	 * 111:112/113/ 
-	 * Explanation: if 111 succeeded execute 112; otherwise execute 113
-	 * 
-	 * 111://112://113
-	 * Explanation: execute 111, 112 and 113 in sequence regardless of the failure.
-	 * 
-	 * @return
-	 */
-	public String getShotRule();
+	public com.xifttt.engine.ConditionExpression getConditionExpression() {
+		return conditionExpression;
+	}
+
+
+	public void setConditionExpression(com.xifttt.engine.ConditionExpression conditionExpression) {
+		this.conditionExpression = conditionExpression;
+	}
+
+
+	public com.xifttt.engine.ActionExpression getActionExpression() {
+		return actionExpression;
+	}
+
+
+	public void setActionExpression(com.xifttt.engine.ActionExpression actionExpression) {
+		this.actionExpression = actionExpression;
+	}
+
+
+ 
 
 }

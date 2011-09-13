@@ -2,11 +2,31 @@ package com.xifttt.engine;
 
 import java.util.Map;
 
-public interface ActionParam {
+public class ActionParam {
 
-	long getConditionServiceId();
+	private long channelServiceId;
+	private long conditionServiceId;
+	private Map<String, ?> params;
 	
-	Map<String, ?> getParams();
+	public ActionParam(long channelServiceId, long conditionServiceId, Map<String, ?> params){
+		this.channelServiceId = channelServiceId;
+		this.conditionServiceId = conditionServiceId;
+		this.params = params;
+	}
+
+	public long getChannelServiceId() {
+		return channelServiceId;
+	}
+	
+	public long getConditionServiceId(){
+		return conditionServiceId;
+	}
+	
+	public Map<String, ?> getParams(){
+		return params;
+	}
+
+
 	
 	
 }
