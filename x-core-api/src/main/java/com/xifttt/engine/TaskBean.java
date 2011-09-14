@@ -1,13 +1,13 @@
 package com.xifttt.engine;
 
-import java.util.Collection;
+
 /**
  * 
  * 
  * @author Jimmy
  *
  */
-public class Task {
+public class TaskBean {
 	
 	private long conditionCombinationWindow;
 	
