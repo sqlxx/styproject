@@ -6,7 +6,7 @@ public interface Registration {
 
 	public void deregister();
 	
-	public void conditionSatisfied(long contionId, Map<String, ?> outputParams);
+	public void conditionSatisfied(long contionId, long conditionServiceId, Map<String, ?> outputParams);
 	
-	public void actionCompleted(long actionId, boolean succeeded, String message);
+	public void actionCompleted(long actionId, long actionServiceId, boolean succeeded, String message);
 }
