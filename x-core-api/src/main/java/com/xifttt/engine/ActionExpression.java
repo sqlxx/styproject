@@ -2,8 +2,6 @@ package com.xifttt.engine;
 
 public interface ActionExpression {
 	
-	public ActionExpression onSuccessRun(ActionBean actionBean);
-	
-	public ActionExpression onFailureRun(ActionBean actionBean);
+	public ActionExpression followedBy(ActionBean successFollower, ActionBean failureFollower);
 
 }
