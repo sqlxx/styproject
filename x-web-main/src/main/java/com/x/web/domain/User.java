@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.x.web.constant.OauthSource;
 import com.x.web.constant.UserStatus;
 import com.x.web.util.AuthUtil;
 
@@ -42,8 +43,10 @@ public class User implements Serializable {
 	private String email;
 	private UserStatus status;
 	private Date lastLogin;
-	private Date createdDatetime = new Date();
+	private Date createdDatetime;
 	private Date updatedDatetime = new Date();
+	private boolean loginFromOauth;
+	private OauthSource oauthSource;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -102,7 +105,22 @@ public class User implements Serializable {
     public void setStatus(UserStatus status) {
         this.status = status;
     }
-	
+    @Transient
+    public boolean isLoginFromOauth() {
+        return loginFromOauth;
+    }
+    @Transient
+    public void setLoginFromOauth(boolean loginFromOauth) {
+        this.loginFromOauth = loginFromOauth;
+    }
+    @Transient
+    public OauthSource getOauthSource() {
+        return oauthSource;
+    }
+    @Transient
+    public void setOauthSource(OauthSource oauthSource) {
+        this.oauthSource = oauthSource;
+    }
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

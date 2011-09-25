@@ -13,4 +13,6 @@
 		<input id="user_pwd" type="password" name="password"/>
 		<button id="submit" type="submit">登录</button>
 	</form>
+	
+	<a href="<c:url value='/user/login/sina'/>" >新浪微博 </a>登录
 </div>

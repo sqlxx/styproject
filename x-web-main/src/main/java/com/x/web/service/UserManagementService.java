@@ -13,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.x.web.constant.ActivationType;
 import com.x.web.constant.UserStatus;
 import com.x.web.dao.hibernate.ActivationDAO;
+import com.x.web.dao.hibernate.SinaOauthUserDAO;
 import com.x.web.dao.hibernate.UserDAO;
 import com.x.web.domain.Activation;
+import com.x.web.domain.SinaOauthUser;
 import com.x.web.domain.User;
 import com.x.web.exception.AuthException;
 import com.x.web.exception.ServiceException;
@@ -35,6 +37,8 @@ public class UserManagementService {
     private UserDAO userDAO;
     @Autowired
     private ActivationDAO activationDAO;
+    @Autowired
+    private SinaOauthUserDAO sinaOauthUserDAO;
     
     public User authenticate(String usernameOrEmail, String password) throws AuthException {
         log.debug("Start authenticate for user '{}'", usernameOrEmail);
@@ -71,6 +75,15 @@ public class UserManagementService {
         return user;
     }
     
+    public User login(Long userId) {
+        User user = userDAO.findById(userId);
+        if (user != null) {
+            user.setLastLogin(new Date());
+            userDAO.saveOrUpdate(user);
+        }
+        return user;
+    }
+    
     public User registerUser(String userName, String email, String password) {
         log.debug("Starting register user with {} & {}", userName, email);
         
@@ -91,6 +104,7 @@ public class UserManagementService {
         user.setUsername(userName);
         user.setEmail(email);
         user.setStatus(UserStatus.INACTIVE);
+        user.setCreatedDatetime(new Date());
         
         try {
             user = userDAO.saveOrUpdate(user);
@@ -142,5 +156,17 @@ public class UserManagementService {
             throw new ServiceException("查询用户失败！", ex);
         }
     }
+    
+    public SinaOauthUser saveOrUpdateSinaOauthUser(Long sinaUserId, String token, String tokenSecret) {
+        SinaOauthUser sinaOauthUser = new SinaOauthUser();
+        sinaOauthUser.setSinaUserId(sinaUserId);
+        sinaOauthUser.setToken(token);
+        sinaOauthUser.setTokenSecret(tokenSecret);
+        sinaOauthUser.setUpdatedDate(new Date());
+        
+        sinaOauthUser = sinaOauthUserDAO.saveOrUpdate(sinaOauthUser);
+        return sinaOauthUser;
+    }
+    
      
 }
