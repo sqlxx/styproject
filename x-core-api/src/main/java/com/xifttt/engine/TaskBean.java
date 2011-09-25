@@ -32,17 +32,7 @@ public class TaskBean {
 	
 
 
-	/**
-	 * @param conditionCombinationWindow seconds
-	 */
-	public void setConditionCombinationWindow(long conditionCombinationWindow) {
-		this.conditionCombinationWindow = conditionCombinationWindow;
-	}
-
-
-	public long getConditionCombinationWindow(){
-		return this.conditionCombinationWindow;
-	}
+	
 	
 
 
