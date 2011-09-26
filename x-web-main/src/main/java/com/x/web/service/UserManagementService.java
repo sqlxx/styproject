@@ -46,7 +46,7 @@ public class UserManagementService {
         
         User user = userDAO.findByUsernameOrActiveEmail(usernameOrEmail);
         
-        if (user != null) {
+        if (user != null && user.getPassword() != null) { //Password == null means it's a external platform user.
             
             if (user.getPassword().equals(AuthUtil.encodePassword(password))) {
                 log.debug("Password validation succeeded for user/email '{}'.", usernameOrEmail);
@@ -172,7 +172,7 @@ public class UserManagementService {
     /**
      * @param string
      */
-    public User createUser(String userName, OauthSource source) {
+    public User createUser(Long externalId, String userName, OauthSource source) {
         User user = new User();
         user.setCreatedDatetime(new Date());
         user.setLoginFromOauth(true);
@@ -180,7 +180,11 @@ public class UserManagementService {
         user.setUsername(userName);
         user.setStatus(UserStatus.ACTIVE);
         
-        userDAO.saveOrUpdate(user);
+        user = userDAO.saveOrUpdate(user);
+        
+        if (source.equals(OauthSource.SINA)) {
+            sinaOauthUserDAO.findById(externalId).setUserId(user.getId());
+        }
         
         return user;
     }

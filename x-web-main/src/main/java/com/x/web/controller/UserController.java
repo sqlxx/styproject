@@ -134,7 +134,7 @@ public class UserController extends BaseController{
                 SinaOauthUser sinaOauthUser = ums.saveOrUpdateSinaOauthUser(accessToken.getUserId(), accessToken.getToken(), accessToken.getTokenSecret());
                 if (sinaOauthUser.getUserId() == null) {
 //                    weibo4j.User user = weibo.showUser(sinaOauthUser.getSinaUserId().toString());
-                    User localUser = ums.createUser(OauthSource.SINA.toString() + sinaOauthUser.getSinaUserId(), OauthSource.SINA);
+                    User localUser = ums.createUser(sinaOauthUser.getSinaUserId(), OauthSource.SINA.toString() + sinaOauthUser.getSinaUserId(), OauthSource.SINA);
                     session.setAttribute(SessionKey.USER, localUser);
                     FlashMap.setSuccessMessage("欢迎来自新浪的用户: " + localUser.getUsername());
                 } else {
