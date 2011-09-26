@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.x.web.constant.ActivationType;
+import com.x.web.constant.OauthSource;
 import com.x.web.constant.UserStatus;
 import com.x.web.dao.hibernate.ActivationDAO;
 import com.x.web.dao.hibernate.SinaOauthUserDAO;
@@ -166,6 +167,22 @@ public class UserManagementService {
         
         sinaOauthUser = sinaOauthUserDAO.saveOrUpdate(sinaOauthUser);
         return sinaOauthUser;
+    }
+
+    /**
+     * @param string
+     */
+    public User createUser(String userName, OauthSource source) {
+        User user = new User();
+        user.setCreatedDatetime(new Date());
+        user.setLoginFromOauth(true);
+        user.setOauthSource(source);
+        user.setUsername(userName);
+        user.setStatus(UserStatus.ACTIVE);
+        
+        userDAO.saveOrUpdate(user);
+        
+        return user;
     }
     
      

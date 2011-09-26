@@ -13,12 +13,12 @@
 	</definition>
 	
 	<definition name="xweb.login" extends="xweb.normal_layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/user/login.jsp"/>
 		<put-attribute name="title" value="用户登录"/>
 	</definition>
 	
 	<definition name="xweb.register" extends="xweb.normal_layout">
-		<put-attribute name="body" value="/WEB-INF/jsp/register.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/user/register.jsp"/>
 		<put-attribute name="title" value="用户注册"/>
 	</definition>
 	

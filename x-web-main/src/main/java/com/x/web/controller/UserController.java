@@ -52,7 +52,7 @@ public class UserController extends BaseController{
             
             User user = ums.login(userName, password);
             if (user != null) {
-                session.setAttribute("user", user);
+                session.setAttribute(SessionKey.USER, user);
                 FlashMap.setSuccessMessage("欢迎 " + userName + ", 你目前的状态是：" + user.getStatus().toString());
                 return "redirect:/main";
             } else {
@@ -133,15 +133,19 @@ public class UserController extends BaseController{
                 AccessToken accessToken = weibo.getOAuthAccessToken(oauthToken, tokenSecret, oauthVerifier);
                 SinaOauthUser sinaOauthUser = ums.saveOrUpdateSinaOauthUser(accessToken.getUserId(), accessToken.getToken(), accessToken.getTokenSecret());
                 if (sinaOauthUser.getUserId() == null) {
-                    return "login/createUserName";//TODO to page that as user to create a user Id;
+//                    weibo4j.User user = weibo.showUser(sinaOauthUser.getSinaUserId().toString());
+                    User localUser = ums.createUser(OauthSource.SINA.toString() + sinaOauthUser.getSinaUserId(), OauthSource.SINA);
+                    session.setAttribute(SessionKey.USER, localUser);
+                    FlashMap.setSuccessMessage("欢迎来自新浪的用户: " + localUser.getUsername());
                 } else {
                     User user = ums.login(sinaOauthUser.getUserId());
                     user.setLoginFromOauth(true);
                     user.setOauthSource(OauthSource.SINA);
-                    session.setAttribute("user", user);
-                    FlashMap.setSuccessMessage("欢迎 " + user.getUsername());
-                    return "redirect:/main";
+                    session.setAttribute(SessionKey.USER, user);
+                    FlashMap.setSuccessMessage("欢迎来自新浪的用户： " + user.getUsername());
                 }
+                
+                return "redirect:/main";
                 
             } catch(WeiboException ex) {
                 throw new AuthException("Exception when login by Sina id.", ex);
